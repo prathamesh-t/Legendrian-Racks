@@ -1,0 +1,99 @@
+============================== prooftrans ============================
+Prover9 (64) version 2009-11A, November 2009.
+Process 12690 was started by prathamesh on sas205,
+Mon Feb 20 21:33:35 2017
+The command was "/usr/bin/prover9".
+============================== end of head ===========================
+
+============================== end of input ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.04 (+ 0.01) seconds.
+% Length of proof is 78.
+% Level of proof is 14.
+% Maximum clause weight is 16.000.
+% Given clauses 96.
+
+
+1 (all x all y all z (x * y) * z = (x * z) * (y * z)) # label(non_clause).  [assumption].
+2 (all x all y (x @ y) * y = x) # label(non_clause).  [assumption].
+3 (all x all y (x * y) @ y = x) # label(non_clause).  [assumption].
+4 (all x pow(x) = (x * x) * x) # label(non_clause).  [assumption].
+5 (all x neg_pow(x) = (x @ x) @ x) # label(non_clause).  [assumption].
+9 (all x U(x,neg_pow(x))) # label(non_clause).  [assumption].
+10 (all x D(neg_pow(x),x @ x)) # label(non_clause).  [assumption].
+11 (all x D(x,neg_pow(x))) # label(non_clause).  [assumption].
+13 (all x D(x * x,pow(x))) # label(non_clause).  [assumption].
+14 (all x U(pow(x),x)) # label(non_clause).  [assumption].
+15 (all x all y all z (U(x * z,y) & D(y,z) -> x = z)) # label(non_clause).  [assumption].
+16 (all x all y all z (U(x * z,y) & D(y,z) -> y = pow(x))) # label(non_clause).  [assumption].
+19 (all x all y all z (D(x,y) & U(y,z @ x) -> x = z)) # label(non_clause).  [assumption].
+21 (all x all y all z (D(x * z,y) & U(y,z) -> x = z)) # label(non_clause).  [assumption].
+23 (all x all y all z (U(x,y) -> U(x * z,y * z))) # label(non_clause).  [assumption].
+24 (all x all y all z (U(x,y) -> U(x @ z,y @ z))) # label(non_clause).  [assumption].
+26 (all x all y all z (D(x,y) -> D(x @ z,y @ z))) # label(non_clause).  [assumption].
+27 (all x all y all z (U(x,y) -> (z @ x) * y = z)) # label(non_clause).  [assumption].
+30 (all x all y all z (D(x,y) -> (z * x) @ y = z)) # label(non_clause).  [assumption].
+31 U(a,b) <-> D(a,b) # label(non_clause) # label(goal).  [goal].
+32 (x * y) * (z * y) = (x * z) * y.  [clausify(1)].
+33 (x @ y) * y = x.  [clausify(2)].
+34 (x * y) @ y = x.  [clausify(3)].
+35 pow(x) = (x * x) * x.  [clausify(4)].
+36 neg_pow(x) = (x @ x) @ x.  [clausify(5)].
+42 U(x,neg_pow(x)).  [clausify(9)].
+43 U(x,(x @ x) @ x).  [copy(42),rewrite([36(1)])].
+44 D(neg_pow(x),x @ x).  [clausify(10)].
+45 D((x @ x) @ x,x @ x).  [copy(44),rewrite([36(1)])].
+46 D(x,neg_pow(x)).  [clausify(11)].
+47 D(x,(x @ x) @ x).  [copy(46),rewrite([36(1)])].
+50 D(x * x,pow(x)).  [clausify(13)].
+51 D(x * x,(x * x) * x).  [copy(50),rewrite([35(2)])].
+52 U(pow(x),x).  [clausify(14)].
+53 U((x * x) * x,x).  [copy(52),rewrite([35(1)])].
+54 -U(x * y,z) | -D(z,y) | y = x.  [clausify(15)].
+55 -U(x * y,z) | -D(z,y) | pow(x) = z.  [clausify(16)].
+56 -U(x * y,z) | -D(z,y) | (x * x) * x = z.  [copy(55),rewrite([35(4)])].
+60 -D(x,y) | -U(y,z @ x) | z = x.  [clausify(19)].
+63 -D(x * y,z) | -U(z,y) | y = x.  [clausify(21)].
+66 -U(x,y) | U(x * z,y * z).  [clausify(23)].
+67 -U(x,y) | U(x @ z,y @ z).  [clausify(24)].
+69 -D(x,y) | D(x @ z,y @ z).  [clausify(26)].
+70 -U(x,y) | (z @ x) * y = z.  [clausify(27)].
+73 -D(x,y) | (z * x) @ y = z.  [clausify(30)].
+74 U(a,b) | D(a,b).  [deny(31)].
+75 -U(a,b) | -D(a,b).  [deny(31)].
+87 ((x * y) * (z * y)) @ y = x * z.  [para(32(a,2),34(a,1,1))].
+103 -U(x,y) | -D(y,z) | x @ z = z.  [para(33(a,1),54(a,1)),flip(c)].
+119 -D(x * ((y @ y) @ y),y) | (y @ y) @ y = x.  [resolve(63,b,43,a)].
+127 U(x * y,((x @ x) @ x) * y).  [resolve(66,a,43,a)].
+131 U(x @ y,((x @ x) @ x) @ y).  [resolve(67,a,43,a)].
+138 D(x @ y,((x @ x) @ x) @ y).  [resolve(69,a,47,a)].
+141 (x @ ((y * y) * y)) * y = x.  [resolve(70,a,53,a)].
+153 (x * (y * y)) @ ((y * y) * y) = x.  [resolve(73,a,51,a)].
+273 -D(b,x) | a @ x = x | D(a,b).  [resolve(103,a,74,a)].
+342 U(x * x,x @ x).  [para(33(a,1),127(a,2))].
+353 -D(x @ x,x) | x @ x = (x * x) * x.  [resolve(342,a,56,a),flip(b)].
+399 -D(x,y @ x) | (y @ y) @ y = x.  [resolve(131,a,60,b)].
+401 U(x,(((x * y) @ (x * y)) @ (x * y)) @ y).  [para(34(a,1),131(a,1))].
+459 D(x,(((x * y) @ (x * y)) @ (x * y)) @ y).  [para(34(a,1),138(a,1))].
+474 x @ ((y * y) * y) = x @ y.  [para(141(a,1),34(a,1,1)),flip(a)].
+481 (x * (y * y)) @ y = x.  [back_rewrite(153),rewrite([474(5)])].
+509 x * (y * y) = x * y.  [para(481(a,1),33(a,1,1)),flip(a)].
+510 x @ (y * y) = x @ y.  [para(33(a,1),481(a,1,1)),flip(a)].
+535 D(x @ x,x).  [para(510(a,1),45(a,1,1)),rewrite([34(2),510(2),510(4),34(3)])].
+541 x @ x = (x * x) * x.  [back_unit_del(353),unit_del(a,535)].
+543 D(x,x * x).  [back_rewrite(459),rewrite([541(3),34(7),87(4)])].
+552 U(x,x * x).  [back_rewrite(401),rewrite([541(3),34(7),87(4)])].
+554 -D(x,y @ x) | y * y = x.  [back_rewrite(399),rewrite([541(3),34(5)])].
+580 -D(x * y,y) | y * y = x.  [back_rewrite(119),rewrite([541(1),34(3),509(2),541(3),34(5)])].
+751 -D(x,y) | x @ y = y * y.  [para(33(a,1),580(a,1)),flip(b)].
+814 a @ b = b * b | D(a,b).  [resolve(273,a,543,a),rewrite([510(5)])].
+815 a @ b = b * b.  [resolve(814,b,751,a),merge(b)].
+826 a * a = b.  [para(815(a,1),554(a,2)),unit_del(a,543)].
+866 D(a,b).  [para(826(a,1),543(a,2))].
+867 U(a,b).  [para(826(a,1),552(a,2))].
+887 $F.  [back_unit_del(75),unit_del(a,867),unit_del(b,866)].
+
+============================== end of proof ==========================

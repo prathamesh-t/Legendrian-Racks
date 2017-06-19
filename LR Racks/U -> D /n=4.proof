@@ -1,0 +1,51 @@
+============================== prooftrans ============================
+Prover9 (64) version 2009-11A, November 2009.
+Process 12982 was started by prathamesh on sas205,
+Mon Feb 20 21:46:26 2017
+The command was "/usr/bin/prover9".
+============================== end of head ===========================
+
+============================== end of input ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.01 (+ 0.01) seconds.
+% Length of proof is 30.
+% Level of proof is 10.
+% Maximum clause weight is 19.000.
+% Given clauses 63.
+
+
+1 (all x all y all z (x * y) * z = (x * z) * (y * z)) # label(non_clause).  [assumption].
+3 (all x all y (x * y) @ y = x) # label(non_clause).  [assumption].
+4 (all x pow(x) = ((x * x) * x) * x) # label(non_clause).  [assumption].
+7 (all x pow5(y) = (((x * x) * x) * x) * x) # label(non_clause).  [assumption].
+9 (all x D(pow(x),x)) # label(non_clause).  [assumption].
+15 (all x U(pow(x),x)) # label(non_clause).  [assumption].
+20 (all x all y all z (D(x,y) & U(y,z @ x) -> x = z)) # label(non_clause).  [assumption].
+34 U(a,b) -> D(a,b) # label(non_clause) # label(goal).  [goal].
+35 (x * y) * (z * y) = (x * z) * y.  [clausify(1)].
+37 (x * y) @ y = x.  [clausify(3)].
+38 pow(x) = ((x * x) * x) * x.  [clausify(4)].
+41 pow5(x) = (((y * y) * y) * y) * y.  [clausify(7)].
+44 D(pow(x),x).  [clausify(9)].
+45 D(((x * x) * x) * x,x).  [copy(44),rewrite([38(1)])].
+56 U(pow(x),x).  [clausify(15)].
+57 U(((x * x) * x) * x,x).  [copy(56),rewrite([38(1)])].
+64 -D(x,y) | -U(y,z @ x) | z = x.  [clausify(20)].
+81 -D(a,b).  [deny(34)].
+82 pow5(x) = c_0.  [new_symbol(41)].
+83 (((x * x) * x) * x) * x = c_0.  [back_rewrite(41),rewrite([82(1)]),flip(a)].
+88 ((x * y) * (z * y)) * (u * y) = ((x * z) * u) * y.  [para(35(a,2),35(a,1,1))].
+156 c_0 @ x = ((x * x) * x) * x.  [para(83(a,1),37(a,1,1))].
+358 ((((x * x) * x) * y) * (x * y)) * (x * y) = c_0.  [para(88(a,1),83(a,1,1,1))].
+363 c_0 * x = c_0.  [para(83(a,1),88(a,2,1)),rewrite([358(7)]),flip(a)].
+397 ((x * x) * x) * x = c_0.  [para(363(a,1),37(a,1,1)),rewrite([156(2)])].
+429 U(c_0,x).  [back_rewrite(57),rewrite([397(3)])].
+431 D(c_0,x).  [back_rewrite(45),rewrite([397(3)])].
+453 c_0 = x.  [hyper(64,a,431,a,b,429,a),flip(a)].
+468 D(x,y).  [para(453(a,1),431(a,1))].
+469 $F.  [resolve(468,a,81,a)].
+
+============================== end of proof ==========================

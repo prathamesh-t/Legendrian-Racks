@@ -1,0 +1,45 @@
+============================== prooftrans ============================
+Prover9 (32) version Dec-2007, Dec 2007.
+Process 2915 was started by prathamesh on Deep-Thought,
+Tue Apr 11 02:28:12 2017
+The command was "/home/prathamesh/p9m4-v05/bin/prover9".
+============================== end of head ===========================
+
+============================== end of input ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.01 (+ 0.01) seconds.
+% Length of proof is 25.
+% Level of proof is 6.
+% Maximum clause weight is 35.
+% Given clauses 15.
+
+1 (all x pow4(x) = ((x * x) * x) * x) # label(non_clause).  [assumption].
+3 (all x pow8(x) = ((((((x * x) * x) * x) * x) * x) * x) * x) # label(non_clause).  [assumption].
+4 (all x all y all z (x * y) * z = (x * z) * (y * z)) # label(non_clause).  [assumption].
+5 (all x all y (x @ y) * y = x) # label(non_clause).  [assumption].
+7 (all x x = pow8(x)) # label(non_clause).  [assumption].
+8 (all x all y (U(x,y) <-> y = (x * x) * x)) # label(non_clause).  [assumption].
+9 pow4(pow4(a)) * a = a # label(non_clause) # label(goal).  [goal].
+11 -U(x,y) | (x * x) * x = y.  [clausify(8)].
+12 U(a,b).  [assumption].
+13 pow4(x) = ((x * x) * x) * x.  [clausify(1)].
+15 pow8(x) = ((((((x * x) * x) * x) * x) * x) * x) * x.  [clausify(3)].
+16 (x * y) * (z * y) = (x * z) * y.  [clausify(4)].
+17 (x @ y) * y = x.  [clausify(5)].
+19 pow8(x) = x.  [clausify(7)].
+20 ((((((x * x) * x) * x) * x) * x) * x) * x = x.  [copy(19),rewrite([15(1)])].
+21 pow4(pow4(a)) * a != a.  [deny(9)].
+22 ((((((a * a) * a) * a) * (((a * a) * a) * a)) * (((a * a) * a) * a)) * (((a * a) * a) * a)) * a != a.  [copy(21),rewrite([13(2),13(8)])].
+23 (a * a) * a = b.  [resolve(12,a,11,a)].
+25 ((((b * a) * (b * a)) * (b * a)) * (b * a)) * a != a.  [back_rewrite(22),rewrite([23(5),23(8),23(12),23(16)])].
+36 ((x @ y) * z) * y = x * (z * y).  [para(17(a,1),16(a,1,1)),flip(a)].
+53 ((((b * a) * a) * a) * a) * a = a.  [para(23(a,1),20(a,1,1,1,1,1,1))].
+69 x * (y * y) = x * y.  [para(17(a,1),36(a,1,1)),flip(a)].
+71 x * b = x * a.  [para(23(a,1),36(a,2,2)),rewrite([69(6),17(4)]),flip(a)].
+90 x * (b * y) = x * (a * y).  [para(71(a,1),36(a,1,1)),rewrite([36(4)]),flip(a)].
+95 $F.  [back_rewrite(25),rewrite([90(7),69(7),90(9),69(9),90(11),69(11),53(11)]),xx(a)].
+
+============================== end of proof ==========================

@@ -1,0 +1,44 @@
+============================== prooftrans ============================
+Prover9 (64) version 2009-11A, November 2009.
+Process 985 was started by prathamesh on sas205,
+Thu Apr 20 22:12:20 2017
+The command was "/usr/bin/prover9".
+============================== end of head ===========================
+
+============================== end of input ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.01 (+ 0.00) seconds.
+% Length of proof is 23.
+% Level of proof is 5.
+% Maximum clause weight is 13.000.
+% Given clauses 18.
+
+
+1 (all x all y all z (x * y) * z = (x * z) * (y * z)) # label(non_clause).  [assumption].
+4 (all x pow(x) = ((x * x) * x) * x) # label(non_clause).  [assumption].
+5 (all x x = pow(x)) # label(non_clause).  [assumption].
+6 (all x cuspow(x) = x * x) # label(non_clause).  [assumption].
+7 (all x all y (U(x,y) <-> y = cuspow(x))) # label(non_clause).  [assumption].
+8 a = a * a # label(non_clause) # label(goal).  [goal].
+10 -U(x,y) | cuspow(x) = y.  [clausify(7)].
+11 U(a,b).  [assumption].
+12 U(b,a).  [assumption].
+13 (x * y) * (z * y) = (x * z) * y.  [clausify(1)].
+16 pow(x) = ((x * x) * x) * x.  [clausify(4)].
+17 pow(x) = x.  [clausify(5)].
+18 ((x * x) * x) * x = x.  [copy(17),rewrite([16(1)])].
+19 cuspow(x) = x * x.  [clausify(6)].
+20 a * a != a.  [deny(8)].
+21 cuspow(a) = b.  [resolve(11,a,10,a)].
+22 a * a = b.  [copy(21),rewrite([19(2)])].
+23 cuspow(b) = a.  [resolve(12,a,10,a)].
+24 b * b = a.  [copy(23),rewrite([19(2)])].
+26 b != a.  [back_rewrite(20),rewrite([22(3)])].
+44 ((x * x) * (x * x)) * x = x.  [para(13(a,2),18(a,1,1))].
+126 b = a.  [para(22(a,1),44(a,1,1,1)),rewrite([22(4),24(3),22(3)])].
+127 $F.  [resolve(126,a,26,a)].
+
+============================== end of proof ==========================

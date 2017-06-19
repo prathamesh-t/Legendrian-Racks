@@ -1,0 +1,40 @@
+============================== prooftrans ============================
+Prover9 (64) version 2009-11A, November 2009.
+Process 14243 was started by prathamesh on sas205,
+Fri Feb  3 17:45:09 2017
+The command was "/usr/bin/prover9".
+============================== end of head ===========================
+
+============================== end of input ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.01 (+ 0.00) seconds.
+% Length of proof is 19.
+% Level of proof is 5.
+% Maximum clause weight is 15.000.
+% Given clauses 39.
+
+
+2 (all x all y (x @ y) * y = x) # label(non_clause).  [assumption].
+3 (all x all y (x * y) @ y = x) # label(non_clause).  [assumption].
+11 (all x U((((x * x) * (x * x)) * (x * x)) * x,x)) # label(non_clause).  [assumption].
+12 (all x all y all z (U(x * z,y) & D(y,z) -> x = z)) # label(non_clause).  [assumption].
+25 (all x all y all z (U(x,y) -> (z @ y) * x = z)) # label(non_clause).  [assumption].
+28 b = ((a * a) * (a * a)) * (a * a) # label(non_clause) # label(goal).  [goal].
+30 (x @ y) * y = x.  [clausify(2)].
+31 (x * y) @ y = x.  [clausify(3)].
+39 U((((x * x) * (x * x)) * (x * x)) * x,x).  [clausify(11)].
+40 -U(x * y,z) | -D(z,y) | y = x.  [clausify(12)].
+53 -U(x,y) | (z @ y) * x = z.  [clausify(25)].
+56 U(a,b).  [assumption].
+57 D(a,b).  [assumption].
+58 ((a * a) * (a * a)) * (a * a) != b.  [deny(28)].
+85 -U(x,y) | -D(y,z) | x @ z = z.  [para(30(a,1),40(a,1)),flip(c)].
+120 (x @ b) * a = x.  [hyper(53,a,56,a)].
+143 x @ b = x @ a.  [para(120(a,1),31(a,1,1)),flip(a)].
+190 ((a * a) * (a * a)) * (a * a) = b.  [hyper(85,a,39,a,b,57,a),rewrite([143(15),31(15)])].
+191 $F.  [resolve(190,a,58,a)].
+
+============================== end of proof ==========================

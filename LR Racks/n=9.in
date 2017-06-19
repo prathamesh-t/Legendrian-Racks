@@ -1,0 +1,166 @@
+% Saved by Prover9-Mace4 Version 0.5, December 2007.
+
+set(ignore_option_dependencies). % GUI handles dependencies
+
+if(Prover9). % Options for Prover9
+  assign(max_weight, 25).
+  set(restrict_denials).
+  assign(new_constants, 1).
+  assign(max_seconds, 60).
+end_if.
+
+if(Mace4).   % Options for Mace4
+  assign(max_seconds, 60).
+end_if.
+
+formulas(assumptions).
+
+% Distributivity from a nonstandard Boolean algebra (BA) basis.
+
+% Prover9 should produce a proof in a few seconds.
+
+% Nonstandard Boolean algebra basis.
+% Rack Axioms
+
+all x all y all z ((x*y)*z = (x*z)*(y*z)).
+all x all y ((x@y) * y = x).
+all x all y ((x*y)@y = x).
+%all x (pow (x) = ((x*x)*x)*x).
+%all x (neg_pow (x) = ((x@x)@x)@x).
+
+all x (pow (x) = ((((((((x*x)*x)*x)*x)*x)*x)*x)*x)).
+all x (neg_pow (x) = ((((((((x@x)@x)@x)@x)@x)@x)@x)@x)).
+
+all x (pow8 (x) = (((((((x*x)*x)*x)*x)*x)*x)*x)).
+all x (pow16 (x) = ((((((((((((((x*x)*x)*x)*x)*x)*x)*x)*x)*x)*x)*x)*x)*x)*x)*x).
+%Predicate Axioms
+%all x (U(x*x,(x*x)*(x*x))). 
+%all x (D((x*x)*(x*x), x)).
+
+all x (U(x*x,pow (x))). 
+all x (D(pow (x), x)).
+%B
+all x (U(x,neg_pow (x))). 
+all x (D(neg_pow (x), x@x)).
+
+%C
+all x (D(x,neg_pow (x))). 
+all x (U(neg_pow (x), x@x)).
+
+%D
+all x (D(x*x,pow (x))). 
+all x (U(pow (x), x)).
+%Reidemeister Axioms
+%Move 1
+%A
+all x all y all z ((U(x*z, y) & D(y, z))  -> (x = z)).
+all x all y all z ((U(x*z, y) & D(y, z))  -> (y =pow (x))).
+%B
+all x all y all z ((D(y, z@x) & U(x, y))  -> (x = z)).
+all x all y all z ((D(y, z@x) & U(x, y))  -> (y = neg_pow (x))).
+
+%C
+
+all x all y all z ((D(x, y) & U(y, z@x))  -> (x = z)).
+all x all y all z ((D(x, y) & U(y, z@x))  -> (y = neg_pow (x))).
+
+%D
+
+all x all y all z ((D(x*z, y) & U(y, z))  -> (x = z)).
+all x all y all z ((D(x*z, y) & U(y, z))  -> (y = pow (x))).
+
+%Move 2
+%A
+all x all y all z (U(x,y) -> U(x*z, y*z)).
+%A-Inverse
+all x all y all z (U(x,y) -> U(x@z, y@z)).
+
+%B
+all x all y all z (D(x,y) -> D(x*z, y*z)).
+%B-Inverse
+all x all y all z (D(x,y) -> D(x@z, y@z)).
+
+%C
+all x all y all z (U(x, y) -> (z@x)*y = z).
+
+%C-Inverse
+all x all y all z (U(x, y) -> (z@y)*x = z).
+
+%D
+all x all y all z (D(x,y) -> (z*y)@x = z). 
+
+%D-Inverse
+all x all y all z (D(x, y) -> (z*x)@y = z).
+
+%Simplifying function.
+all x (f(x) = (x * x)).
+all x (g(x) = (x@x)).
+%assumption.
+
+%Knot Tests
+
+%D(a_20, a_1).
+
+%U(a_1,a_2).
+%U(a_2,a_3).
+%U(a_3,a_4).
+%U(a_4,a_5).
+%U(a_5,a_6).
+%U(a_6,a_7).
+%U(a_7,a_8).
+%U(a_8,a_9).
+%U(a_9,a_10).
+%U(a_10,a_11).
+%U(a_11,a_12).
+%U(a_12,a_13).
+%U(a_13,a_14).
+%U(a_14,a_15).
+%U(a_15,a_16).
+%U(a_16,a_17).
+%U(a_17,a_18).
+%$U(a_18,a_19).
+%U(a_19,a_20).
+%U(a_20,a_21).
+%U(a_21,a_22).
+%U(a_22,a_23).
+%U(a_23,a_24).
+%U(a_24,a_25).
+%U(a_25,a_26).
+%U(a_26,a_27).
+%U(a_27,a_28).
+
+%U conditions
+U(a, b).
+
+end_of_list.
+
+formulas(goals).
+
+%a = (pow16 (a)).
+b = pow8 (a).
+%U(x, y) <-> D(x, y).
+%(((x*x)*(x*x))*(x*x))*x = ((((x*x)*x)*x)*x).
+%b= f (f (f (a))).
+%a =    (f (f (f (f (f (f (a)))))))*a.
+%a =   (g (g (g( g( g (g (a)))))))@a.
+%a_1 = a_10.
+%a_1*a_1 = a_1.
+
+%a_1 = a_2.
+%a_1 = a_3.
+%a_1 = a_4.
+%a_1 = a_5.
+%a_1 = a_6.
+%a_1 = a_7.
+%a_1 = a_8.
+%a_1 = a_9.
+%a_1 = a_10.
+%a_1 = a_11.
+%a_1 = a_12.
+%a_1 = a_13.
+%a_1 = a_14.
+%a_1 = a_15.
+%a_1 = a_16.
+
+end_of_list.
+

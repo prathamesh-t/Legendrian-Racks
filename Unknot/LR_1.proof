@@ -1,0 +1,38 @@
+============================== prooftrans ============================
+Prover9 (32) version Dec-2007, Dec 2007.
+Process 4957 was started by prathamesh on Deep-Thought,
+Sat Apr  8 02:44:08 2017
+The command was "/home/prathamesh/p9m4-v05/bin/prover9".
+============================== end of head ===========================
+
+============================== end of input ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.02 (+ 0.00) seconds.
+% Length of proof is 18.
+% Level of proof is 5.
+% Maximum clause weight is 13.
+% Given clauses 18.
+
+1 (all x pow4(x) = ((x * x) * x) * x) # label(non_clause).  [assumption].
+3 (all x all y all z (x * y) * z = (x * z) * (y * z)) # label(non_clause).  [assumption].
+6 (all x x = pow4(x)) # label(non_clause).  [assumption].
+7 (all x all y (U(x,y) <-> y = x * x)) # label(non_clause).  [assumption].
+8 a = b # label(non_clause) # label(goal).  [goal].
+10 -U(x,y) | x * x = y.  [clausify(7)].
+11 U(a,b).  [assumption].
+12 U(b,a).  [assumption].
+13 pow4(x) = ((x * x) * x) * x.  [clausify(1)].
+15 (x * y) * (z * y) = (x * z) * y.  [clausify(3)].
+18 pow4(x) = x.  [clausify(6)].
+19 ((x * x) * x) * x = x.  [copy(18),rewrite([13(1)])].
+20 b != a.  [deny(8)].
+21 a * a = b.  [resolve(11,a,10,a)].
+22 b * b = a.  [resolve(12,a,10,a)].
+42 ((x * x) * (x * x)) * x = x.  [para(15(a,2),19(a,1,1))].
+124 b = a.  [para(21(a,1),42(a,1,1,1)),rewrite([21(4),22(3),21(3)])].
+125 $F.  [resolve(124,a,20,a)].
+
+============================== end of proof ==========================

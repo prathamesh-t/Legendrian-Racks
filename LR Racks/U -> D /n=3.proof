@@ -1,0 +1,52 @@
+============================== prooftrans ============================
+Prover9 (64) version 2009-11A, November 2009.
+Process 13027 was started by prathamesh on sas205,
+Mon Feb 20 21:47:34 2017
+The command was "/usr/bin/prover9".
+============================== end of head ===========================
+
+============================== end of input ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.02 (+ 0.00) seconds.
+% Length of proof is 31.
+% Level of proof is 9.
+% Maximum clause weight is 11.000.
+% Given clauses 72.
+
+
+2 (all x all y (x @ y) * y = x) # label(non_clause).  [assumption].
+3 (all x all y (x * y) @ y = x) # label(non_clause).  [assumption].
+5 (all x neg_pow(x) = (x @ x) @ x) # label(non_clause).  [assumption].
+10 (all x D(neg_pow(x),x @ x)) # label(non_clause).  [assumption].
+11 (all x D(x,neg_pow(x))) # label(non_clause).  [assumption].
+17 (all x all y all z (D(y,z @ x) & U(x,y) -> x = z)) # label(non_clause).  [assumption].
+25 (all x all y all z (D(x,y) -> D(x * z,y * z))) # label(non_clause).  [assumption].
+28 (all x all y all z (U(x,y) -> (z @ y) * x = z)) # label(non_clause).  [assumption].
+33 U(a,b) -> D(a,b) # label(non_clause) # label(goal).  [goal].
+35 (x @ y) * y = x.  [clausify(2)].
+36 (x * y) @ y = x.  [clausify(3)].
+38 neg_pow(x) = (x @ x) @ x.  [clausify(5)].
+46 D(neg_pow(x),x @ x).  [clausify(10)].
+47 D((x @ x) @ x,x @ x).  [copy(46),rewrite([38(1)])].
+48 D(x,neg_pow(x)).  [clausify(11)].
+49 D(x,(x @ x) @ x).  [copy(48),rewrite([38(1)])].
+59 -D(x,y @ z) | -U(z,x) | y = z.  [clausify(17)].
+70 -D(x,y) | D(x * z,y * z).  [clausify(25)].
+73 -U(x,y) | (z @ y) * x = z.  [clausify(28)].
+78 U(a,b).  [deny(33)].
+79 -D(a,b).  [deny(33)].
+143 (x @ b) * a = x.  [hyper(73,a,78,a)].
+163 x @ b = x @ a.  [para(143(a,1),36(a,1,1)),flip(a)].
+174 D((b @ a) @ a,b @ a).  [para(163(a,1),47(a,1,1)),rewrite([163(5),163(8)])].
+175 D(b,(b @ a) @ a).  [para(163(a,1),49(a,2,1)),rewrite([163(6)])].
+210 b @ a = a.  [hyper(59,a,175,a,b,78,a)].
+221 D(a @ a,a).  [back_rewrite(174),rewrite([210(3),210(6)])].
+223 a * a = b.  [para(210(a,1),35(a,1,1))].
+252 D((a @ a) * x,a * x).  [hyper(70,a,221,a)].
+439 D(a,b).  [para(35(a,1),252(a,1)),rewrite([223(4)])].
+440 $F.  [resolve(439,a,79,a)].
+
+============================== end of proof ==========================

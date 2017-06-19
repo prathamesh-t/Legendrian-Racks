@@ -1,0 +1,93 @@
+============================== prooftrans ============================
+Prover9 (64) version 2009-11A, November 2009.
+Process 17715 was started by prathamesh on sas205,
+Sat Feb  4 00:44:33 2017
+The command was "/usr/bin/prover9".
+============================== end of head ===========================
+
+============================== end of input ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.02 (+ 0.00) seconds.
+% Length of proof is 72.
+% Level of proof is 13.
+% Maximum clause weight is 17.000.
+% Given clauses 50.
+
+
+1 (all x all y all z (x * y) * z = (x * z) * (y * z)) # label(non_clause).  [assumption].
+2 (all x all y (x @ y) * y = x) # label(non_clause).  [assumption].
+3 (all x all y (x * y) @ y = x) # label(non_clause).  [assumption].
+4 (all x x = ((x * x) * (x * x)) * x) # label(non_clause).  [assumption].
+5 a_1 = a_10 # label(non_clause) # label(goal).  [goal].
+6 (x * y) * (z * y) = (x * z) * y.  [clausify(1)].
+7 (x @ y) * y = x.  [clausify(2)].
+8 (x * y) @ y = x.  [clausify(3)].
+9 ((x * x) * (x * x)) * x = x.  [clausify(4)].
+10 a_2 = a_1 * a_1.  [assumption].
+11 a_1 * a_1 = a_2.  [copy(10),flip(a)].
+12 a_3 = a_2 * a_2.  [assumption].
+13 a_2 * a_2 = a_3.  [copy(12),flip(a)].
+14 a_4 = a_3 * a_3.  [assumption].
+15 a_3 * a_3 = a_4.  [copy(14),flip(a)].
+16 a_5 = a_4 * a_4.  [assumption].
+17 a_4 * a_4 = a_5.  [copy(16),flip(a)].
+18 a_6 = a_5 * a_5.  [assumption].
+19 a_5 * a_5 = a_6.  [copy(18),flip(a)].
+20 a_7 = a_6 * a_6.  [assumption].
+21 a_6 * a_6 = a_7.  [copy(20),flip(a)].
+22 a_8 = a_7 * a_7.  [assumption].
+23 a_7 * a_7 = a_8.  [copy(22),flip(a)].
+24 a_9 = a_8 * a_8.  [assumption].
+25 a_8 * a_8 = a_9.  [copy(24),flip(a)].
+26 a_10 = a_9 * a_9.  [assumption].
+27 a_9 * a_9 = a_10.  [copy(26),flip(a)].
+28 a_1 = a_10 * a_10.  [assumption].
+29 a_10 * a_10 = a_1.  [copy(28),flip(a)].
+30 a_10 != a_1.  [deny(5)].
+34 (x * (y * z)) * (z * (y * z)) = (x * y) * z.  [para(6(a,1),6(a,2))].
+38 ((x @ y) * z) * y = x * (z * y).  [para(7(a,1),6(a,1,1)),flip(a)].
+49 ((x * x) * x) * x = x.  [para(6(a,1),9(a,1,1))].
+50 x @ x = (x * x) * (x * x).  [para(9(a,1),8(a,1,1))].
+55 a_3 * a_1 = a_1.  [para(11(a,1),9(a,1,1,1)),rewrite([11(4),13(3)])].
+60 a_4 * a_2 = a_2.  [para(13(a,1),9(a,1,1,1)),rewrite([13(4),15(3)])].
+70 a_6 * a_4 = a_4.  [para(17(a,1),9(a,1,1,1)),rewrite([17(4),19(3)])].
+80 a_8 * a_6 = a_6.  [para(21(a,1),9(a,1,1,1)),rewrite([21(4),23(3)])].
+90 a_10 * a_8 = a_8.  [para(25(a,1),9(a,1,1,1)),rewrite([25(4),27(3)])].
+94 a_10 @ a_9 = a_9.  [para(27(a,1),8(a,1,1))].
+95 a_1 * a_9 = a_9.  [para(27(a,1),9(a,1,1,1)),rewrite([27(4),29(3)])].
+132 (x * a_3) * a_1 = (x * a_1) * a_1.  [para(55(a,1),6(a,1,2)),flip(a)].
+274 (x * a_8) * a_8 = (x * a_10) * a_8.  [para(90(a,1),6(a,1,2))].
+416 (a_2 * a_1) * a_1 = a_1.  [para(11(a,1),49(a,1,1,1))].
+418 (a_4 * a_3) * a_3 = a_3.  [para(15(a,1),49(a,1,1,1))].
+420 (a_6 * a_5) * a_5 = a_5.  [para(19(a,1),49(a,1,1,1))].
+423 (a_9 * a_10) * a_8 = a_8.  [para(25(a,1),49(a,1,1,1)),rewrite([274(5)])].
+450 a_2 * a_1 = a_3.  [para(416(a,1),8(a,1,1)),rewrite([50(3),11(3),11(4),13(3)]),flip(a)].
+545 a_5 * (a_3 * a_4) = a_3.  [para(418(a,1),34(a,2)),rewrite([15(4),17(3),15(5)])].
+565 x * a_2 = x * a_1.  [para(11(a,1),38(a,2,2)),rewrite([7(4)]),flip(a)].
+566 ((x @ a_2) * a_1) * a_1 = x * a_3.  [para(13(a,1),38(a,2,2)),rewrite([565(4),565(6)])].
+567 x * a_4 = x * a_3.  [para(15(a,1),38(a,2,2)),rewrite([7(4)]),flip(a)].
+569 x * a_6 = x * a_5.  [para(19(a,1),38(a,2,2)),rewrite([7(4)]),flip(a)].
+571 x * a_8 = x * a_7.  [para(23(a,1),38(a,2,2)),rewrite([7(4)]),flip(a)].
+573 x * a_9 = x * a_10.  [para(27(a,1),38(a,2,2)),rewrite([7(4)])].
+574 x * a_10 = x * a_1.  [para(29(a,1),38(a,2,2)),rewrite([7(4)])].
+577 x * a_3 = x * a_1.  [para(60(a,1),38(a,2,2)),rewrite([567(4),565(6),132(6),566(6),565(4)])].
+597 (a_9 * x) * a_1 = a_10 * (x * a_1).  [para(94(a,1),38(a,1,1,1)),rewrite([573(4),574(4),573(7),574(7)])].
+626 a_4 * a_1 = a_2.  [back_rewrite(60),rewrite([565(3)])].
+627 a_5 * a_1 = a_3.  [back_rewrite(545),rewrite([567(4),577(4),55(4)])].
+637 a_6 * a_1 = a_4.  [back_rewrite(70),rewrite([567(3),577(3)])].
+638 a_5 = a_2.  [back_rewrite(17),rewrite([567(3),577(3),626(3)]),flip(a)].
+650 a_8 * a_1 = a_6.  [back_rewrite(80),rewrite([569(3),638(2),565(3)])].
+652 a_7 = a_4.  [back_rewrite(21),rewrite([569(3),638(2),565(3),637(3)]),flip(a)].
+655 a_10 * a_1 = a_8.  [back_rewrite(423),rewrite([574(3),571(5),652(4),567(5),577(5),597(5),11(4),565(3)])].
+664 a_9 = a_6.  [back_rewrite(25),rewrite([571(3),652(2),567(3),577(3),650(3)]),flip(a)].
+673 a_6 = a_2.  [back_rewrite(95),rewrite([664(2),569(3),638(2),565(3),11(3),664(2)]),flip(a)].
+675 a_3 = a_10.  [back_rewrite(27),rewrite([664(1),673(1),664(2),673(2),565(3),450(3)])].
+679 a_8 = a_1.  [back_rewrite(29),rewrite([574(3),655(3)])].
+686 a_2 = a_1.  [back_rewrite(420),rewrite([673(1),638(2),565(3),450(3),675(1),638(2),565(3),655(3),679(1),638(2)]),flip(a)].
+688 a_10 = a_1.  [back_rewrite(627),rewrite([638(1),686(1),11(3),686(1),675(2)]),flip(a)].
+689 $F.  [resolve(688,a,30,a)].
+
+============================== end of proof ==========================

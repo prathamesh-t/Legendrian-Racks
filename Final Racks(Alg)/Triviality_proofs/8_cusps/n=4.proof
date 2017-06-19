@@ -1,0 +1,199 @@
+============================== prooftrans ============================
+Prover9 (64) version 2009-11A, November 2009.
+Process 1757 was started by prathamesh on sas205,
+Thu Apr 20 23:46:14 2017
+The command was "/usr/bin/prover9".
+============================== end of head ===========================
+
+============================== end of input ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.05 (+ 0.00) seconds.
+% Length of proof is 178.
+% Level of proof is 35.
+% Maximum clause weight is 23.000.
+% Given clauses 69.
+
+
+1 (all x all y all z (x * y) * z = (x * z) * (y * z)) # label(non_clause).  [assumption].
+2 (all x all y (x @ y) * y = x) # label(non_clause).  [assumption].
+3 (all x all y (x * y) @ y = x) # label(non_clause).  [assumption].
+4 (all x pow(x) = ((((((((x * x) * x) * x) * x) * x) * x) * x) * x) * x) # label(non_clause).  [assumption].
+5 (all x x = pow(x)) # label(non_clause).  [assumption].
+6 (all x cuspow(x) = (((x * x) * x) * x) * x) # label(non_clause).  [assumption].
+7 (all x all y (U(x,y) <-> y = cuspow(x))) # label(non_clause).  [assumption].
+8 a_1 = a_1 * a_1 # label(non_clause) # label(goal).  [goal].
+10 -U(x,y) | cuspow(x) = y.  [clausify(7)].
+11 U(a_1,a_2).  [assumption].
+12 U(a_2,a_3).  [assumption].
+13 U(a_3,a_4).  [assumption].
+14 U(a_4,a_5).  [assumption].
+15 U(a_5,a_6).  [assumption].
+16 U(a_6,a_7).  [assumption].
+17 U(a_7,a_8).  [assumption].
+18 U(a_8,a_1).  [assumption].
+19 (x * y) * (z * y) = (x * z) * y.  [clausify(1)].
+20 (x @ y) * y = x.  [clausify(2)].
+21 (x * y) @ y = x.  [clausify(3)].
+22 pow(x) = ((((((((x * x) * x) * x) * x) * x) * x) * x) * x) * x.  [clausify(4)].
+23 pow(x) = x.  [clausify(5)].
+24 ((((((((x * x) * x) * x) * x) * x) * x) * x) * x) * x = x.  [copy(23),rewrite([22(1)])].
+25 cuspow(x) = (((x * x) * x) * x) * x.  [clausify(6)].
+26 a_1 * a_1 != a_1.  [deny(8)].
+27 cuspow(a_1) = a_2.  [resolve(11,a,10,a)].
+28 (((a_1 * a_1) * a_1) * a_1) * a_1 = a_2.  [copy(27),rewrite([25(2)])].
+29 cuspow(a_2) = a_3.  [resolve(12,a,10,a)].
+30 (((a_2 * a_2) * a_2) * a_2) * a_2 = a_3.  [copy(29),rewrite([25(2)])].
+31 cuspow(a_3) = a_4.  [resolve(13,a,10,a)].
+32 (((a_3 * a_3) * a_3) * a_3) * a_3 = a_4.  [copy(31),rewrite([25(2)])].
+33 cuspow(a_4) = a_5.  [resolve(14,a,10,a)].
+34 (((a_4 * a_4) * a_4) * a_4) * a_4 = a_5.  [copy(33),rewrite([25(2)])].
+35 cuspow(a_5) = a_6.  [resolve(15,a,10,a)].
+36 (((a_5 * a_5) * a_5) * a_5) * a_5 = a_6.  [copy(35),rewrite([25(2)])].
+37 cuspow(a_6) = a_7.  [resolve(16,a,10,a)].
+38 (((a_6 * a_6) * a_6) * a_6) * a_6 = a_7.  [copy(37),rewrite([25(2)])].
+39 cuspow(a_7) = a_8.  [resolve(17,a,10,a)].
+40 (((a_7 * a_7) * a_7) * a_7) * a_7 = a_8.  [copy(39),rewrite([25(2)])].
+41 cuspow(a_8) = a_1.  [resolve(18,a,10,a)].
+42 (((a_8 * a_8) * a_8) * a_8) * a_8 = a_1.  [copy(41),rewrite([25(2)])].
+44 ((x * y) * z) * (u * (y * z)) = ((x * z) * u) * (y * z).  [para(19(a,1),19(a,1,1))].
+45 (x * (y * z)) * ((u * y) * z) = (x * (u * z)) * (y * z).  [para(19(a,1),19(a,1,2))].
+46 ((x * y) * z) * ((u * y) * z) = ((x * u) * y) * z.  [para(19(a,1),19(a,2,1))].
+47 (x * (y * z)) * (z * (y * z)) = (x * y) * z.  [para(19(a,1),19(a,2))].
+49 (x * (y * z)) * u = (x * u) * ((y * u) * (z * u)).  [para(19(a,2),19(a,1,2)),flip(a)].
+51 ((x @ y) * z) * y = x * (z * y).  [para(20(a,1),19(a,1,1)),flip(a)].
+53 ((x @ y) * z) * (y * z) = x * z.  [para(20(a,1),19(a,2,1))].
+64 x @ x = (((((((x * x) * x) * x) * x) * x) * x) * x) * x.  [para(24(a,1),21(a,1,1))].
+68 (x * (((a_1 * a_1) * a_1) * a_1)) * a_1 = (x * a_1) * a_2.  [para(28(a,1),19(a,1,2)),flip(a)].
+73 ((((a_2 * a_2) * a_2) * a_2) * x) * a_2 = a_3 * (x * a_2).  [para(30(a,1),19(a,1,1)),flip(a)].
+78 ((((a_3 * a_2) * a_2) * a_2) * a_2) * a_2 = a_2.  [para(30(a,1),24(a,1,1,1,1,1,1))].
+89 a_5 @ a_4 = ((a_4 * a_4) * a_4) * a_4.  [para(34(a,1),21(a,1,1))].
+90 ((((a_5 * a_4) * a_4) * a_4) * a_4) * a_4 = a_4.  [para(34(a,1),24(a,1,1,1,1,1,1))].
+98 (x * (((a_6 * a_6) * a_6) * a_6)) * a_6 = (x * a_6) * a_7.  [para(38(a,1),19(a,1,2)),flip(a)].
+102 ((((a_7 * a_6) * a_6) * a_6) * a_6) * a_6 = a_6.  [para(38(a,1),24(a,1,1,1,1,1,1))].
+104 (x * (((a_7 * a_7) * a_7) * a_7)) * a_7 = (x * a_7) * a_8.  [para(40(a,1),19(a,1,2)),flip(a)].
+110 (x * (((a_8 * a_8) * a_8) * a_8)) * a_8 = (x * a_8) * a_1.  [para(42(a,1),19(a,1,2)),flip(a)].
+111 ((((a_8 * a_8) * a_8) * a_8) * x) * (a_8 * x) = a_1 * x.  [para(42(a,1),19(a,2,1))].
+236 (((a_8 * a_8) * a_8) * a_8) * ((a_8 * a_8) * a_8) = a_1.  [para(46(a,2),42(a,1))].
+239 ((x * ((a_8 * a_8) * a_8)) * a_8) * a_8 = ((x * a_8) * a_8) * a_1.  [para(42(a,1),46(a,1,2)),flip(a)].
+242 ((x * (y * z)) * z) * (z * ((y * z) * z)) = ((x * y) * z) * z.  [para(46(a,1),44(a,2))].
+248 x * (y * y) = x * y.  [para(20(a,1),51(a,1,1)),flip(a)].
+257 x * ((y * y) * z) = x * (y * z).  [para(19(a,1),248(a,1,2))].
+258 (x @ (y * y)) * y = x.  [para(248(a,1),20(a,1))].
+261 x * (((y * y) * z) * z) = x * ((y * z) * z).  [para(44(a,2),248(a,1,2)),rewrite([242(7)])].
+265 x * (((y * y) * z) * u) = x * ((y * z) * u).  [para(46(a,1),248(a,1,2))].
+267 ((x * a_8) * a_8) * a_8 = ((x * a_8) * a_8) * a_1.  [back_rewrite(239),rewrite([257(6),248(4)])].
+268 (((a_8 * a_8) * a_8) * a_1) * a_8 = a_1.  [back_rewrite(236),rewrite([267(7),257(13),248(11)])].
+276 (x * (a_8 * a_1)) * a_8 = (x * a_8) * a_1.  [back_rewrite(110),rewrite([267(7),265(8),257(6)])].
+277 (x * a_7) * a_8 = (x * a_7) * a_7.  [back_rewrite(104),rewrite([261(8),257(6),248(4)]),flip(a)].
+278 (x * a_6) * a_7 = (x * a_6) * a_6.  [back_rewrite(98),rewrite([261(8),257(6),248(4)]),flip(a)].
+283 (x * a_1) * a_2 = (x * a_1) * a_1.  [back_rewrite(68),rewrite([261(8),257(6),248(4)]),flip(a)].
+289 ((((a_8 * a_8) * a_8) * a_1) * x) * (a_8 * x) = a_1 * x.  [back_rewrite(111),rewrite([267(7)])].
+301 x @ (y * y) = x @ y.  [para(258(a,1),21(a,1,1)),flip(a)].
+305 x @ ((y * y) * z) = x @ (y * z).  [para(19(a,1),301(a,1,2))].
+307 x @ (((y * y) * z) * u) = x @ ((y * z) * u).  [para(46(a,1),301(a,1,2))].
+312 (x * a_2) * (a_1 * a_2) = (x * a_1) * a_1.  [para(28(a,1),47(a,1,1,2)),rewrite([28(12),265(14),257(12),248(10)])].
+316 (x * a_6) * (a_5 * a_6) = (x * a_5) * a_5.  [para(36(a,1),47(a,1,1,2)),rewrite([36(12),265(14),257(12),248(10)])].
+326 (((a_8 * a_8) * a_8) * a_1) * (a_1 * a_8) = a_1.  [para(268(a,1),19(a,2)),rewrite([267(7)])].
+330 (x * (a_8 * a_1)) * (a_1 * a_8) = (x * (a_1 * a_8)) * a_1.  [para(268(a,1),45(a,1,2)),rewrite([267(13),265(14),257(12)]),flip(a)].
+332 ((x * a_8) * a_1) * a_8 = ((x * a_1) * a_8) * a_1.  [para(268(a,1),46(a,1,2)),rewrite([257(12),248(10)]),flip(a)].
+335 (((a_8 * a_1) * a_8) * a_1) * a_1 = a_1.  [para(46(a,2),268(a,1,1)),rewrite([257(11),276(11),332(7)])].
+336 (x * a_8) * a_1 = (x * a_1) * (a_8 * a_1).  [para(268(a,1),47(a,1,1,2)),rewrite([332(12),332(10),335(12),265(14),257(12),276(12)]),flip(a)].
+344 (((a_8 * a_1) * (a_1 * a_8)) * a_1) * a_1 = a_1.  [back_rewrite(326),rewrite([336(7),336(5),330(15),330(11)])].
+346 ((((a_8 * a_1) * (a_8 * a_1)) * (a_8 * a_1)) * x) * (a_8 * x) = a_1 * x.  [back_rewrite(289),rewrite([336(7),336(5)])].
+349 (x * (a_8 * a_1)) * a_8 = (x * a_1) * (a_8 * a_1).  [back_rewrite(276),rewrite([336(10)])].
+350 ((x * a_8) * a_8) * a_8 = ((x * a_1) * (a_8 * a_1)) * (a_8 * a_1).  [back_rewrite(267),rewrite([336(12),336(10)])].
+354 x * a_8 = x * a_7.  [para(20(a,1),277(a,1,1)),rewrite([20(6)])].
+369 ((x * a_7) * a_7) * a_7 = ((x * a_1) * (a_8 * a_1)) * (a_8 * a_1).  [back_rewrite(350),rewrite([354(2),354(4),354(6)])].
+370 (x * (a_8 * a_1)) * a_7 = (x * a_1) * (a_8 * a_1).  [back_rewrite(349),rewrite([354(6)])].
+372 (((a_8 * a_1) * (a_1 * a_7)) * a_1) * a_1 = a_1.  [back_rewrite(344),rewrite([354(6)])].
+387 (((a_7 * a_1) * (a_8 * a_1)) * a_1) * (a_8 * a_1) = a_8.  [back_rewrite(40),rewrite([369(7),370(13)])].
+389 (x @ a_8) * a_7 = x.  [para(354(a,1),20(a,1))].
+396 x * (a_8 * y) = x * (a_7 * y).  [para(354(a,1),51(a,1,1)),rewrite([51(4)]),flip(a)].
+398 x @ (a_8 * a_7) = x @ a_8.  [para(354(a,1),301(a,1,2))].
+401 (((a_7 * a_1) * (a_7 * a_1)) * a_1) * (a_7 * a_1) = a_8.  [back_rewrite(387),rewrite([396(7),396(13)])].
+414 (x * (a_7 * a_1)) * a_7 = (x * a_1) * (a_7 * a_1).  [back_rewrite(370),rewrite([396(4),396(12)])].
+415 ((x * a_7) * a_7) * a_7 = ((x * a_1) * (a_7 * a_1)) * (a_7 * a_1).  [back_rewrite(369),rewrite([396(12),396(16)])].
+420 ((((a_8 * a_1) * (a_7 * a_1)) * (a_7 * a_1)) * x) * (a_7 * x) = a_1 * x.  [back_rewrite(346),rewrite([396(7),396(11),396(15)])].
+424 x @ a_8 = x @ a_7.  [para(389(a,1),21(a,1,1)),flip(a)].
+426 x @ (a_8 * a_7) = x @ a_7.  [back_rewrite(398),rewrite([424(6)])].
+465 x * a_7 = x * a_6.  [para(20(a,1),278(a,1,1)),rewrite([20(6)])].
+484 x @ (a_8 * a_6) = x @ a_7.  [back_rewrite(426),rewrite([465(3)])].
+486 ((x * a_6) * a_6) * a_6 = ((x * a_1) * (a_7 * a_1)) * (a_7 * a_1).  [back_rewrite(415),rewrite([465(2),465(4),465(6)])].
+487 (x * (a_7 * a_1)) * a_6 = (x * a_1) * (a_7 * a_1).  [back_rewrite(414),rewrite([465(6)])].
+503 (((a_8 * a_1) * (a_1 * a_6)) * a_1) * a_1 = a_1.  [back_rewrite(372),rewrite([465(6)])].
+504 x * a_8 = x * a_6.  [back_rewrite(354),rewrite([465(4)])].
+507 a_8 * a_6 = a_6.  [back_rewrite(102),rewrite([486(7),487(13),401(13)])].
+511 (((a_6 * a_1) * (a_7 * a_1)) * a_1) * (a_7 * a_1) = a_7.  [back_rewrite(38),rewrite([486(7),487(13)])].
+516 x @ a_7 = x @ a_6.  [back_rewrite(484),rewrite([507(3)]),flip(a)].
+521 (a_8 * x) * (a_6 * x) = a_6 * x.  [para(507(a,1),19(a,2,1))].
+553 (x * (a_7 * y)) * a_6 = (x * a_6) * (a_6 * (y * a_6)).  [para(507(a,1),49(a,2,2,1)),rewrite([396(3)])].
+558 x * (a_7 * y) = x * (a_6 * y).  [para(465(a,1),51(a,1,1)),rewrite([51(4)]),flip(a)].
+562 (x * (a_6 * y)) * a_6 = (x * a_6) * (a_6 * (y * a_6)).  [back_rewrite(553),rewrite([558(3)])].
+567 (((a_6 * a_1) * (a_6 * a_1)) * a_1) * (a_6 * a_1) = a_7.  [back_rewrite(511),rewrite([558(7),558(13)])].
+580 ((x * a_6) * a_6) * a_6 = ((x * a_1) * (a_6 * a_1)) * (a_6 * a_1).  [back_rewrite(486),rewrite([558(12),558(16)])].
+584 (((a_6 * a_1) * (a_6 * a_1)) * x) * (a_6 * x) = a_1 * x.  [back_rewrite(420),rewrite([558(7),521(7),558(7),558(11)])].
+588 (((a_7 * a_1) * (a_6 * a_1)) * a_1) * (a_6 * a_1) = a_8.  [back_rewrite(401),rewrite([558(7),558(13)])].
+590 a_1 * a_1 = a_7.  [back_rewrite(567),rewrite([584(13)])].
+603 ((a_7 * a_1) * a_1) * a_1 = a_2.  [back_rewrite(28),rewrite([590(3)])].
+604 a_7 != a_1.  [back_rewrite(26),rewrite([590(3)])].
+615 x * a_6 = x * a_1.  [para(590(a,1),51(a,2,2)),rewrite([20(4),465(4)]),flip(a)].
+616 x @ a_6 = x @ a_1.  [para(590(a,1),301(a,1,2)),rewrite([516(2)])].
+624 ((x * a_1) * (a_6 * a_1)) * (a_6 * a_1) = ((x * a_1) * a_1) * a_1.  [back_rewrite(580),rewrite([615(2),615(4),615(6)]),flip(a)].
+633 (x * (a_6 * y)) * a_1 = (x * a_1) * (a_6 * (y * a_1)).  [back_rewrite(562),rewrite([615(5),615(7),615(10)])].
+639 a_8 * a_1 = a_6.  [back_rewrite(507),rewrite([615(3)])].
+640 x * a_8 = x * a_1.  [back_rewrite(504),rewrite([615(4)])].
+641 ((a_6 * a_1) * a_1) * a_1 = a_1.  [back_rewrite(503),rewrite([639(3),615(4),590(4),465(3),615(3)])].
+647 x * a_7 = x * a_1.  [back_rewrite(465),rewrite([615(4)])].
+650 (x * a_5) * a_5 = (x * a_1) * (a_5 * a_1).  [back_rewrite(316),rewrite([615(2),615(5)]),flip(a)].
+656 x @ a_7 = x @ a_1.  [back_rewrite(516),rewrite([616(4)])].
+660 a_2 * a_1 = a_8.  [back_rewrite(588),rewrite([633(9),590(9),647(8),624(13),603(7)])].
+676 (((a_5 * a_1) * (a_5 * a_1)) * a_1) * (a_5 * a_1) = a_6.  [back_rewrite(36),rewrite([650(5),650(11)])].
+715 (x * a_2) * a_1 = (x * a_1) * a_1.  [para(660(a,1),19(a,1,2)),rewrite([640(4)]),flip(a)].
+729 x * (a_6 * y) = x * (a_1 * y).  [para(615(a,1),51(a,1,1)),rewrite([51(4)]),flip(a)].
+745 x * (a_7 * y) = x * (a_1 * y).  [back_rewrite(558),rewrite([729(6)])].
+763 x * a_3 = x * a_2.  [para(30(a,1),53(a,1,2)),rewrite([307(8),305(6),301(4),20(4)])].
+765 (((a_3 * a_2) * a_2) * a_2) * a_2 = a_4.  [para(32(a,1),53(a,2)),rewrite([763(3),763(5),763(7),763(10),763(12),53(13)])].
+766 x * a_5 = x * a_4.  [para(34(a,1),53(a,1,2)),rewrite([307(8),305(6),301(4),20(4)])].
+773 (x * (y * z)) * y = (x * y) * (y * (z * y)).  [para(53(a,1),47(a,1,1)),rewrite([51(7)]),flip(a)].
+778 ((x @ a_2) * a_1) * a_1 = x * a_1.  [para(660(a,1),53(a,1,2)),rewrite([640(6)])].
+799 a_4 * a_2 = a_2.  [back_rewrite(78),rewrite([765(9)])].
+808 (x * a_4) * a_4 = (x * a_1) * (a_5 * a_1).  [back_rewrite(650),rewrite([766(2),766(4)])].
+820 a_6 * a_4 = a_4.  [back_rewrite(90),rewrite([808(5),808(11),676(13)])].
+821 a_5 @ a_4 = ((a_4 * a_1) * (a_5 * a_1)) * a_4.  [back_rewrite(89),rewrite([808(8)])].
+824 (((a_4 * a_1) * (a_5 * a_1)) * a_1) * (a_5 * a_1) = a_5.  [back_rewrite(34),rewrite([808(5),808(11)])].
+843 ((x * a_4) * y) * a_4 = ((x * a_1) * a_4) * (y * a_4).  [para(820(a,1),44(a,1,2,2)),rewrite([615(2),820(13)]),flip(a)].
+848 x * (a_1 * a_4) = x * a_4.  [para(820(a,1),51(a,2,2)),rewrite([615(4),51(6)])].
+852 x * (a_5 * a_1) = x * a_4.  [para(820(a,1),53(a,1,2)),rewrite([616(2),808(6),20(4)])].
+853 (((a_4 * a_1) * a_1) * a_1) * a_4 = a_5.  [back_rewrite(824),rewrite([852(7),852(11),843(9),848(11),808(9),852(11)])].
+854 a_5 @ a_4 = ((a_4 * a_1) * a_1) * a_4.  [back_rewrite(821),rewrite([852(10),808(10),852(12)])].
+860 (x * a_4) * a_4 = (x * a_1) * a_4.  [back_rewrite(808),rewrite([852(10)])].
+864 (((a_5 * a_1) * a_1) * a_1) * a_4 = a_6.  [back_rewrite(676),rewrite([852(7),852(11),843(9),848(11),860(9)])].
+868 (x @ a_3) * a_2 = x.  [para(763(a,1),20(a,1))].
+898 x * (a_5 * y) = x * (a_4 * y).  [para(766(a,1),51(a,1,1)),rewrite([51(4)]),flip(a)].
+907 x * (a_4 * a_1) = x * a_4.  [back_rewrite(852),rewrite([898(4)])].
+910 x @ a_3 = x @ a_2.  [para(868(a,1),21(a,1,1)),flip(a)].
+924 a_3 * (a_1 * a_2) = a_1.  [para(615(a,1),73(a,1,1)),rewrite([715(9),715(7),715(5),660(3),639(3),283(7),641(7),729(6)]),flip(a)].
+928 a_1 @ (a_1 * a_2) = a_3.  [para(924(a,1),21(a,1,1))].
+937 a_3 * a_1 = a_1.  [para(924(a,1),248(a,2)),rewrite([312(8),590(4),745(5),590(4),647(3)])].
+938 a_1 * (a_2 * (a_1 * a_2)) = a_1 * a_2.  [para(924(a,1),47(a,1,1)),rewrite([937(10)])].
+946 x * (a_1 * a_2) = x * a_1.  [para(924(a,1),53(a,1,2)),rewrite([910(2),773(8),660(8),640(7),590(7),647(6),778(6)]),flip(a)].
+949 a_1 * a_2 = a_7.  [back_rewrite(938),rewrite([946(6),660(4),640(3),590(3)]),flip(a)].
+954 (a_6 * a_1) * a_1 = a_3.  [back_rewrite(928),rewrite([949(4),656(3),64(3),590(3),603(7),660(3),639(3)])].
+968 x * a_2 = x * a_1.  [para(949(a,1),53(a,1,2)),rewrite([647(6),715(6),20(4)]),flip(a)].
+1002 a_4 * a_1 = a_2.  [back_rewrite(799),rewrite([968(3)])].
+1026 a_5 = a_4.  [back_rewrite(853),rewrite([1002(3),660(3),639(3),820(3)]),flip(a)].
+1032 a_8 * a_4 = a_4.  [back_rewrite(854),rewrite([1026(1),64(3),860(5),1002(3),860(5),660(3),860(5),639(3),820(3),860(5),1002(3),860(5),660(3),860(5),639(3),820(3),1002(4),660(4)]),flip(a)].
+1033 x * a_4 = x * a_1.  [back_rewrite(907),rewrite([1002(3),968(2)]),flip(a)].
+1036 a_6 * a_1 = a_6.  [back_rewrite(864),rewrite([1026(1),1002(3),660(3),639(3),1033(3)])].
+1048 a_6 = a_4.  [back_rewrite(1032),rewrite([1033(3),639(3)])].
+1056 a_4 = a_2.  [back_rewrite(820),rewrite([1048(1),1033(3),1002(3)]),flip(a)].
+1066 a_3 = a_2.  [back_rewrite(954),rewrite([1048(1),1056(1),660(3),639(3),1048(1),1056(1)]),flip(a)].
+1070 a_8 = a_2.  [back_rewrite(1036),rewrite([1048(1),1056(1),660(3),1048(2),1056(2)])].
+1087 a_2 = a_1.  [back_rewrite(937),rewrite([1066(1),660(3),1070(1)])].
+1090 a_7 = a_1.  [back_rewrite(660),rewrite([1087(1),590(3),1070(2),1087(2)])].
+1091 $F.  [resolve(1090,a,604,a)].
+
+============================== end of proof ==========================

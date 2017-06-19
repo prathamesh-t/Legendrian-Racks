@@ -1,0 +1,57 @@
+============================== prooftrans ============================
+Prover9 (64) version 2009-11A, November 2009.
+Process 11340 was started by prathamesh on sas205,
+Mon Feb 20 17:27:52 2017
+The command was "/usr/bin/prover9".
+============================== end of head ===========================
+
+============================== end of input ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.02 (+ 0.00) seconds.
+% Length of proof is 36.
+% Level of proof is 8.
+% Maximum clause weight is 15.000.
+% Given clauses 44.
+
+
+1 (all x all y all z (x * y) * z = (x * z) * (y * z)) # label(non_clause).  [assumption].
+2 (all x all y (x @ y) * y = x) # label(non_clause).  [assumption].
+4 (all x pow(x) = (x * x) * x) # label(non_clause).  [assumption].
+5 (all x neg_pow(x) = (x @ x) @ x) # label(non_clause).  [assumption].
+6 (all x pow3(x) = (x * x) * x) # label(non_clause).  [assumption].
+11 (all x D(x,neg_pow(x))) # label(non_clause).  [assumption].
+14 (all x U(pow(x),x)) # label(non_clause).  [assumption].
+15 (all x all y all z (U(x * z,y) & D(y,z) -> x = z)) # label(non_clause).  [assumption].
+16 (all x all y all z (U(x * z,y) & D(y,z) -> y = pow(x))) # label(non_clause).  [assumption].
+30 (all x all y all z (D(x,y) -> (z * x) @ y = z)) # label(non_clause).  [assumption].
+33 x = pow3(x) * x # label(non_clause) # label(goal).  [goal].
+34 (x * y) * (z * y) = (x * z) * y.  [clausify(1)].
+35 (x @ y) * y = x.  [clausify(2)].
+37 pow(x) = (x * x) * x.  [clausify(4)].
+38 neg_pow(x) = (x @ x) @ x.  [clausify(5)].
+39 pow3(x) = (x * x) * x.  [clausify(6)].
+48 D(x,neg_pow(x)).  [clausify(11)].
+49 D(x,(x @ x) @ x).  [copy(48),rewrite([38(1)])].
+54 U(pow(x),x).  [clausify(14)].
+55 U((x * x) * x,x).  [copy(54),rewrite([37(1)])].
+56 -U(x * y,z) | -D(z,y) | y = x.  [clausify(15)].
+57 -U(x * y,z) | -D(z,y) | pow(x) = z.  [clausify(16)].
+58 -U(x * y,z) | -D(z,y) | (x * x) * x = z.  [copy(57),rewrite([37(4)])].
+75 -D(x,y) | (z * x) @ y = z.  [clausify(30)].
+78 pow3(c1) * c1 != c1.  [deny(33)].
+79 ((c1 * c1) * c1) * c1 != c1.  [copy(78),rewrite([39(2)])].
+102 U((x * x) * (x * x),x).  [para(34(a,2),55(a,1))].
+105 -U(x,y) | -D(y,z) | x @ z = z.  [para(35(a,1),56(a,1)),flip(c)].
+140 (x * y) @ ((y @ y) @ y) = x.  [hyper(75,a,49,a)].
+189 (x @ x) @ x = x * x.  [hyper(105,a,55,a,b,49,a),rewrite([140(5)]),flip(a)].
+196 (x * y) @ (y * y) = x.  [back_rewrite(140),rewrite([189(3)])].
+214 D(x,x * x).  [back_rewrite(49),rewrite([189(2)])].
+220 ((x * x) * (x * x)) * (x * x) = x.  [hyper(58,a,102,a,b,214,a)].
+253 x * (y * y) = x * y.  [para(196(a,1),35(a,1,1))].
+258 ((x * x) * x) * x = x.  [back_rewrite(220),rewrite([253(3),253(4)])].
+259 $F.  [resolve(258,a,79,a)].
+
+============================== end of proof ==========================

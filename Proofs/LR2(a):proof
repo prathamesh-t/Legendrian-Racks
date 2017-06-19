@@ -1,0 +1,33 @@
+============================== prooftrans ============================
+Prover9 (64) version 2009-11A, November 2009.
+Process 10801 was started by prathamesh on sas205,
+Thu Feb  2 00:14:42 2017
+The command was "/usr/bin/prover9".
+============================== end of head ===========================
+
+============================== end of input ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.01 (+ 0.00) seconds.
+% Length of proof is 12.
+% Level of proof is 4.
+% Maximum clause weight is 13.000.
+% Given clauses 25.
+
+
+1 (all x all y all z (x * y) * z = (x * z) * (y * z)) # label(non_clause).  [assumption].
+5 (all x all y (U(x,y) <-> y = x * x)) # label(non_clause).  [assumption].
+6 (all p all q all x (U(p,q) -> U(p * x,q * x))) # label(non_clause) # label(goal).  [goal].
+7 (x * y) * (z * y) = (x * z) * y.  [clausify(1)].
+11 -U(x,y) | x * x = y.  [clausify(5)].
+12 U(x,y) | x * x != y.  [clausify(5)].
+13 U(c1,c2).  [deny(6)].
+14 -U(c1 * c3,c2 * c3).  [deny(6)].
+35 U(x * y,(x * x) * y).  [hyper(12,b,7,a)].
+38 c1 * c1 = c2.  [hyper(11,a,13,a)].
+193 U(c1 * x,c2 * x).  [para(38(a,1),35(a,2,1))].
+194 $F.  [resolve(193,a,14,a)].
+
+============================== end of proof ==========================

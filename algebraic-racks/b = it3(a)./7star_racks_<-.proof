@@ -1,0 +1,53 @@
+============================== prooftrans ============================
+Prover9 (64) version 2009-11A, November 2009.
+Process 4750 was started by prathamesh on sas205,
+Thu Feb 16 23:52:26 2017
+The command was "/usr/bin/prover9".
+============================== end of head ===========================
+
+============================== end of input ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.01 (+ 0.00) seconds.
+% Length of proof is 32.
+% Level of proof is 6.
+% Maximum clause weight is 25.000.
+% Given clauses 37.
+
+
+1 (all x all y all z (x * y) * z = (x * z) * (y * z)) # label(non_clause).  [assumption].
+2 (all x all y (x @ y) * y = x) # label(non_clause).  [assumption].
+6 (all x U(x,(((x @ x) @ (x @ x)) @ (x @ x)) @ x)) # label(non_clause).  [assumption].
+8 (all x D(x,(((x @ x) @ (x @ x)) @ (x @ x)) @ x)) # label(non_clause).  [assumption].
+11 (all x U((((x * x) * (x * x)) * (x * x)) * x,x)) # label(non_clause).  [assumption].
+12 (all x all y all z (U(x * z,y) & D(y,z) -> x = z)) # label(non_clause).  [assumption].
+27 (all x all y all z (D(x,y) -> (z * x) @ y = z)) # label(non_clause).  [assumption].
+28 (all x f(x) = x * x) # label(non_clause).  [assumption].
+29 U(a,b) # label(non_clause) # label(goal).  [goal].
+30 (x * y) * (z * y) = (x * z) * y.  [clausify(1)].
+31 (x @ y) * y = x.  [clausify(2)].
+35 U(x,(((x @ x) @ (x @ x)) @ (x @ x)) @ x).  [clausify(6)].
+37 D(x,(((x @ x) @ (x @ x)) @ (x @ x)) @ x).  [clausify(8)].
+40 U((((x * x) * (x * x)) * (x * x)) * x,x).  [clausify(11)].
+41 -U(x * y,z) | -D(z,y) | y = x.  [clausify(12)].
+56 -D(x,y) | (z * x) @ y = z.  [clausify(27)].
+57 f(x) = x * x.  [clausify(28)].
+58 b = f(f(f(a))).  [assumption].
+59 b = ((a * a) * (a * a)) * ((a * a) * (a * a)).  [copy(58),rewrite([57(3),57(5),57(9)])].
+60 -U(a,b).  [deny(29)].
+61 -U(a,((a * a) * (a * a)) * ((a * a) * (a * a))).  [copy(60),rewrite([59(2)])].
+69 ((x @ y) * z) * y = x * (z * y).  [para(31(a,1),30(a,1,1)),flip(a)].
+88 -U(x,y) | -D(y,z) | x @ z = z.  [para(31(a,1),41(a,1)),flip(c)].
+120 (x * y) @ ((((y @ y) @ (y @ y)) @ (y @ y)) @ y) = x.  [hyper(56,a,37,a)].
+135 (((x @ x) @ (x @ x)) @ (x @ x)) @ x = ((x * x) * (x * x)) * (x * x).  [hyper(88,a,40,a,b,37,a),rewrite([120(13)]),flip(a)].
+158 U(x,((x * x) * (x * x)) * (x * x)).  [back_rewrite(35),rewrite([135(6)])].
+186 x * (y * y) = x * y.  [para(31(a,1),69(a,1,1)),flip(a)].
+195 U(x,((x * x) * x) * x).  [back_rewrite(158),rewrite([186(3),186(4)])].
+237 -U(a,((a * a) * a) * ((a * a) * a)).  [back_rewrite(61),rewrite([186(8),186(13)])].
+243 x * ((y * y) * z) = x * (y * z).  [para(30(a,1),186(a,1,2))].
+252 -U(a,((a * a) * a) * a).  [back_rewrite(237),rewrite([243(12),186(10)])].
+253 $F.  [resolve(252,a,195,a)].
+
+============================== end of proof ==========================

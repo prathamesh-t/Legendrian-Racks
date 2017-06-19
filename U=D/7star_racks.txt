@@ -1,0 +1,98 @@
+============================== prooftrans ============================
+Prover9 (64) version 2009-11A, November 2009.
+Process 4157 was started by prathamesh on sas205,
+Thu Feb 16 22:39:28 2017
+The command was "/usr/bin/prover9".
+============================== end of head ===========================
+
+============================== end of input ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.10 (+ 0.00) seconds.
+% Length of proof is 77.
+% Level of proof is 18.
+% Maximum clause weight is 17.000.
+% Given clauses 150.
+
+
+1 (all x all y all z (x * y) * z = (x * z) * (y * z)) # label(non_clause).  [assumption].
+2 (all x all y (x @ y) * y = x) # label(non_clause).  [assumption].
+3 (all x all y (x * y) @ y = x) # label(non_clause).  [assumption].
+7 (all x D((((x @ x) @ (x @ x)) @ (x @ x)) @ x,x @ x)) # label(non_clause).  [assumption].
+9 (all x U((((x @ x) @ (x @ x)) @ (x @ x)) @ x,x @ x)) # label(non_clause).  [assumption].
+12 (all x all y all z (U(x * z,y) & D(y,z) -> x = z)) # label(non_clause).  [assumption].
+18 (all x all y all z (D(x * z,y) & U(y,z) -> x = z)) # label(non_clause).  [assumption].
+21 (all x all y all z (U(x,y) -> U(x @ z,y @ z))) # label(non_clause).  [assumption].
+22 (all x all y all z (D(x,y) -> D(x * z,y * z))) # label(non_clause).  [assumption].
+23 (all x all y all z (D(x,y) -> D(x @ z,y @ z))) # label(non_clause).  [assumption].
+25 (all x all y all z (U(x,y) -> (z @ y) * x = z)) # label(non_clause).  [assumption].
+26 (all x all y all z (D(x,y) -> (z * y) @ x = z)) # label(non_clause).  [assumption].
+27 (all x all y all z (D(x,y) -> (z * x) @ y = z)) # label(non_clause).  [assumption].
+28 U(x,y) <-> D(x,y) # label(non_clause) # label(goal).  [goal].
+29 (x * y) * (z * y) = (x * z) * y.  [clausify(1)].
+30 (x @ y) * y = x.  [clausify(2)].
+31 (x * y) @ y = x.  [clausify(3)].
+35 D((((x @ x) @ (x @ x)) @ (x @ x)) @ x,x @ x).  [clausify(7)].
+37 U((((x @ x) @ (x @ x)) @ (x @ x)) @ x,x @ x).  [clausify(9)].
+40 -U(x * y,z) | -D(z,y) | y = x.  [clausify(12)].
+46 -D(x * y,z) | -U(z,y) | y = x.  [clausify(18)].
+49 -U(x,y) | U(x @ z,y @ z).  [clausify(21)].
+50 -D(x,y) | D(x * z,y * z).  [clausify(22)].
+51 -D(x,y) | D(x @ z,y @ z).  [clausify(23)].
+53 -U(x,y) | (z @ y) * x = z.  [clausify(25)].
+54 -D(x,y) | (z * y) @ x = z.  [clausify(26)].
+55 -D(x,y) | (z * x) @ y = z.  [clausify(27)].
+56 U(c1,c2) | D(c1,c2).  [deny(28)].
+57 -U(c1,c2) | -D(c1,c2).  [deny(28)].
+65 ((x @ y) * z) * y = x * (z * y).  [para(30(a,1),29(a,1,1)),flip(a)].
+67 ((x @ y) * z) * (y * z) = x * z.  [para(30(a,1),29(a,2,1))].
+85 -U(x,y) | -D(y,z) | x @ z = z.  [para(30(a,1),40(a,1)),flip(c)].
+131 D(c1,c2) | -D(x * c2,c1) | c2 = x.  [resolve(56,a,46,b)].
+197 D(c1,c2) | -D(x,c1) | x @ c2 = c2.  [para(30(a,1),131(b,1)),flip(c)].
+237 x * (y * y) = x * y.  [para(30(a,1),65(a,1,1)),flip(a)].
+238 (x * (y * z)) @ z = (x @ z) * y.  [para(65(a,1),31(a,1,1))].
+295 (x @ (y * y)) * y = x.  [para(237(a,1),30(a,1))].
+329 x @ (y * y) = x @ y.  [para(295(a,1),31(a,1,1)),flip(a)].
+335 x @ ((y * y) * z) = x @ (y * z).  [para(29(a,1),329(a,1,2))].
+337 D(((x @ x) @ x) @ x,x).  [para(329(a,1),35(a,1,1,1,1)),rewrite([31(2),329(3),31(2),329(4),31(3),329(4),329(6),31(5)])].
+339 U(((x @ x) @ x) @ x,x).  [para(329(a,1),37(a,1,1,1,1)),rewrite([31(2),329(3),31(2),329(4),31(3),329(4),329(6),31(5)])].
+345 D(c1,c2) | (((c1 @ c1) @ c1) @ c1) @ c2 = c2.  [resolve(337,a,197,b)].
+349 D((((x @ x) @ x) @ x) @ y,x @ y).  [resolve(337,a,51,a)].
+351 D((x @ x) @ x,x * x).  [para(329(a,1),337(a,1,1,1)),rewrite([31(2),329(2),329(3)])].
+353 -D(x,y) | (((x @ x) @ x) @ x) @ y = y.  [resolve(339,a,85,a)].
+356 U((((x @ x) @ x) @ x) @ y,x @ y).  [resolve(339,a,49,a)].
+389 D(x @ x,(x * x) * x).  [para(237(a,1),351(a,2)),rewrite([329(3),31(2),329(2)])].
+403 (x * (y @ y)) @ y = x.  [resolve(389,a,55,a),rewrite([335(5),329(4)])].
+447 x * (y @ y) = x * y.  [para(403(a,1),30(a,1,1)),flip(a)].
+504 x * ((y @ y) * z) = x * (y * z).  [para(447(a,1),65(a,1,1)),rewrite([65(3)]),flip(a)].
+541 (x * y) @ (z * y) = (x @ z) * y.  [para(67(a,1),31(a,1,1))].
+696 (x * y) @ z = (x @ z) * (y @ z).  [para(30(a,1),238(a,1,1,2))].
+697 ((x @ (y * z)) @ z) * y = x @ z.  [para(30(a,1),238(a,1,1)),flip(a)].
+712 (x @ (y * z)) * (z @ (y * z)) = (x @ y) * z.  [back_rewrite(541),rewrite([696(3)])].
+728 -D(x,y) | (z @ x) * (y @ x) = z.  [back_rewrite(54),rewrite([696(3)])].
+774 x @ ((y @ y) * z) = x @ (y * z).  [para(447(a,1),335(a,1,2,1)),rewrite([30(2)]),flip(a)].
+1151 (((c1 @ c1) @ c1) @ c1) @ c2 = c2.  [resolve(353,a,345,a),merge(b)].
+1164 D(c2,c1 @ c2).  [para(1151(a,1),349(a,1))].
+1165 U(c2,c1 @ c2).  [para(1151(a,1),356(a,1))].
+1173 D(c2 * x,(c1 @ c2) * x).  [resolve(1164,a,50,a)].
+1178 (x @ (c1 @ c2)) * c2 = x.  [resolve(1165,a,53,a)].
+1193 D(c2 * c2,c1).  [para(30(a,1),1173(a,2))].
+1226 x * c2 = x * c1.  [para(1178(a,1),67(a,1,1)),rewrite([30(5)]),flip(a)].
+1254 x * ((c1 @ c2) * c1) = x * (c1 @ c2).  [para(1178(a,1),504(a,1,2)),rewrite([1226(9)]),flip(a)].
+1261 x @ (c2 * (c1 @ c2)) = x @ (c1 @ c2).  [para(1178(a,1),697(a,1))].
+1262 x @ ((c1 @ c2) * c1) = x @ (c1 @ c2).  [para(1178(a,1),774(a,1,2)),rewrite([1226(9)]),flip(a)].
+1278 D(c2 * c1,c1).  [back_rewrite(1193),rewrite([1226(3)])].
+1300 (x @ c2) * c1 = x.  [resolve(1278,a,728,a),rewrite([712(10)])].
+1301 ((c2 @ (c2 * c1)) @ (c2 * c1)) @ c1 = c1.  [resolve(1278,a,353,a),rewrite([696(7),712(11),1300(5)])].
+1304 x @ (c1 @ c2) = x @ c1.  [back_rewrite(1262),rewrite([1300(5)]),flip(a)].
+1305 x * (c1 @ c2) = x * c1.  [back_rewrite(1254),rewrite([1300(5)]),flip(a)].
+1310 x @ (c2 * c1) = x @ c1.  [back_rewrite(1261),rewrite([1305(5),1304(8)])].
+1337 ((c2 @ c1) @ c1) @ c1 = c1.  [back_rewrite(1301),rewrite([1310(5),1310(7)])].
+1347 x @ c2 = x @ c1.  [para(1226(a,1),329(a,1,2)),rewrite([1310(4)]),flip(a)].
+1432 D(c1,c2).  [para(1347(a,1),337(a,1,1,1)),rewrite([1347(5),1347(7),1337(7)])].
+1433 U(c1,c2).  [para(1347(a,1),339(a,1,1,1)),rewrite([1347(5),1347(7),1337(7)])].
+1445 $F.  [back_unit_del(57),unit_del(a,1433),unit_del(b,1432)].
+
+============================== end of proof ==========================

@@ -1,0 +1,41 @@
+============================== prooftrans ============================
+Prover9 (64) version 2009-11A, November 2009.
+Process 12676 was started by prathamesh on sas205,
+Thu Feb  2 22:39:15 2017
+The command was "/usr/bin/prover9".
+============================== end of head ===========================
+
+============================== end of input ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.00 (+ 0.00) seconds.
+% Length of proof is 20.
+% Level of proof is 6.
+% Maximum clause weight is 17.000.
+% Given clauses 17.
+
+
+1 (all x all y all z (x * y) * z = (x * z) * (y * z)) # label(non_clause).  [assumption].
+2 (all x all y (x @ y) * y = x) # label(non_clause).  [assumption].
+3 (all x all y (x * y) @ y = x) # label(non_clause).  [assumption].
+4 (all x x = ((x * x) * (x * x)) * x) # label(non_clause).  [assumption].
+5 (c * c) * (c * c) = a # label(non_clause) # label(goal).  [goal].
+6 (x * y) * (z * y) = (x * z) * y.  [clausify(1)].
+7 (x @ y) * y = x.  [clausify(2)].
+8 (x * y) @ y = x.  [clausify(3)].
+9 ((x * x) * (x * x)) * x = x.  [clausify(4)].
+10 a * ((c * c) * (c * c)) = c.  [assumption].
+11 (c * c) * (c * c) != a.  [deny(5)].
+19 ((x @ y) * z) * y = x * (z * y).  [para(7(a,1),6(a,1,1)),flip(a)].
+31 x @ x = (x * x) * (x * x).  [para(9(a,1),8(a,1,1))].
+103 ((x @ (y * z)) * y) * z = x * (z * (y * z)).  [para(19(a,1),6(a,1)),flip(a)].
+105 x * (y * y) = x * y.  [para(7(a,1),19(a,1,1)),flip(a)].
+108 a * c = c.  [para(10(a,1),19(a,2)),rewrite([105(9),105(11),103(9),105(6),105(5)])].
+113 x @ x = (x * x) * x.  [back_rewrite(31),rewrite([105(4)])].
+114 (c * c) * c != a.  [back_rewrite(11),rewrite([105(7)])].
+142 (c * c) * c = a.  [para(108(a,1),8(a,1,1)),rewrite([113(3)])].
+143 $F.  [resolve(142,a,114,a)].
+
+============================== end of proof ==========================

@@ -1,0 +1,54 @@
+============================== prooftrans ============================
+Prover9 (64) version 2009-11A, November 2009.
+Process 12967 was started by prathamesh on sas205,
+Mon Feb 20 21:45:39 2017
+The command was "/usr/bin/prover9".
+============================== end of head ===========================
+
+============================== end of input ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.02 (+ 0.00) seconds.
+% Length of proof is 33.
+% Level of proof is 7.
+% Maximum clause weight is 17.000.
+% Given clauses 51.
+
+
+2 (all x all y (x @ y) * y = x) # label(non_clause).  [assumption].
+3 (all x all y (x * y) @ y = x) # label(non_clause).  [assumption].
+4 (all x pow(x) = (((x * x) * x) * x) * x) # label(non_clause).  [assumption].
+5 (all x neg_pow(x) = (((x @ x) @ x) @ x) @ x) # label(non_clause).  [assumption].
+8 (all x U(x,neg_pow(x))) # label(non_clause).  [assumption].
+10 (all x D(x,neg_pow(x))) # label(non_clause).  [assumption].
+13 (all x U(pow(x),x)) # label(non_clause).  [assumption].
+14 (all x all y all z (U(x * z,y) & D(y,z) -> x = z)) # label(non_clause).  [assumption].
+29 (all x all y all z (D(x,y) -> (z * x) @ y = z)) # label(non_clause).  [assumption].
+33 U(a,b) <- D(a,b) # label(non_clause) # label(goal).  [goal].
+35 (x @ y) * y = x.  [clausify(2)].
+36 (x * y) @ y = x.  [clausify(3)].
+37 pow(x) = (((x * x) * x) * x) * x.  [clausify(4)].
+38 neg_pow(x) = (((x @ x) @ x) @ x) @ x.  [clausify(5)].
+43 U(x,neg_pow(x)).  [clausify(8)].
+44 U(x,(((x @ x) @ x) @ x) @ x).  [copy(43),rewrite([38(1)])].
+47 D(x,neg_pow(x)).  [clausify(10)].
+48 D(x,(((x @ x) @ x) @ x) @ x).  [copy(47),rewrite([38(1)])].
+53 U(pow(x),x).  [clausify(13)].
+54 U((((x * x) * x) * x) * x,x).  [copy(53),rewrite([37(1)])].
+55 -U(x * y,z) | -D(z,y) | y = x.  [clausify(14)].
+74 -D(x,y) | (z * x) @ y = z.  [clausify(29)].
+78 -U(a,b).  [deny(33)].
+79 D(a,b).  [deny(33)].
+106 -U(x,y) | -D(y,z) | x @ z = z.  [para(35(a,1),55(a,1)),flip(c)].
+138 (x * y) @ ((((y @ y) @ y) @ y) @ y) = x.  [hyper(74,a,48,a)].
+141 (x * a) @ b = x.  [hyper(74,a,79,a)].
+157 x @ b = x @ a.  [para(35(a,1),141(a,1,1))].
+200 ((a * a) * a) * a = b.  [hyper(106,a,54,a,b,79,a),rewrite([157(11),36(11)])].
+202 (((x @ x) @ x) @ x) @ x = ((x * x) * x) * x.  [hyper(106,a,54,a,b,48,a),rewrite([138(9)]),flip(a)].
+232 U(x,((x * x) * x) * x).  [back_rewrite(44),rewrite([202(4)])].
+337 U(a,b).  [para(200(a,1),232(a,2))].
+338 $F.  [resolve(337,a,78,a)].
+
+============================== end of proof ==========================

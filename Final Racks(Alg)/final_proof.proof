@@ -1,0 +1,53 @@
+============================== prooftrans ============================
+Prover9 (32) version Dec-2007, Dec 2007.
+Process 2820 was started by prathamesh on Deep-Thought,
+Mon May  8 01:46:34 2017
+The command was "/home/prathamesh/p9m4-v05/bin/prover9".
+============================== end of head ===========================
+
+============================== end of input ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.13 (+ 0.03) seconds.
+% Length of proof is 33.
+% Level of proof is 10.
+% Maximum clause weight is 23.
+% Given clauses 56.
+
+1 (all x all y all z (x * y) * z = (x * z) * (y * z)) # label(non_clause).  [assumption].
+2 (all x all y (x @ y) * y = x) # label(non_clause).  [assumption].
+3 (all x all y (x * y) @ y = x) # label(non_clause).  [assumption].
+4 (all x cuspow(x) = ((((x * x) * x) * x) * x) * x) # label(non_clause).  [assumption].
+5 (all x x = cuspow(x)) # label(non_clause).  [assumption].
+6 a = c # label(non_clause) # label(goal).  [goal].
+7 (x * y) * (z * y) = (x * z) * y.  [clausify(1)].
+8 (x @ y) * y = x.  [clausify(2)].
+9 (x * y) @ y = x.  [clausify(3)].
+10 cuspow(x) = ((((x * x) * x) * x) * x) * x.  [clausify(4)].
+11 cuspow(x) = x.  [clausify(5)].
+12 ((((x * x) * x) * x) * x) * x = x.  [copy(11),rewrite([10(1)])].
+13 a @ a = c @ c.  [assumption].
+14 c @ c = a @ a.  [copy(13),flip(a)].
+15 c != a.  [deny(6)].
+19 ((x * y) * z) * ((u * y) * z) = ((x * u) * y) * z.  [para(7(a,1),7(a,2,1))].
+20 (x * (y * z)) * (z * (y * z)) = (x * y) * z.  [para(7(a,1),7(a,2))].
+24 ((x @ y) * z) * y = x * (z * y).  [para(8(a,1),7(a,1,1)),flip(a)].
+26 ((x @ y) * z) * (y * z) = x * z.  [para(8(a,1),7(a,2,1))].
+37 x @ x = (((x * x) * x) * x) * x.  [para(12(a,1),9(a,1,1))].
+38 (((c * c) * c) * c) * c = (((a * a) * a) * a) * a.  [back_rewrite(14),rewrite([37(3),37(12)])].
+55 x * (y * y) = x * y.  [para(8(a,1),24(a,1,1)),flip(a)].
+60 x * ((y * y) * z) = x * (y * z).  [para(7(a,1),55(a,1,2))].
+131 x * (((y * y) * z) * u) = x * ((y * z) * u).  [para(19(a,1),55(a,1,2))].
+138 x * ((y * z) * y) = x * (y * (z * y)).  [para(7(a,1),60(a,1,2))].
+146 x * ((((y * y) * z) * u) * w) = x * (((y * z) * u) * w).  [para(19(a,1),60(a,1,2,1))].
+187 (x * (y * z)) * y = (x * y) * (y * (z * y)).  [para(26(a,1),20(a,1,1)),rewrite([24(7)]),flip(a)].
+706 (x * c) * c = (x * c) * a.  [para(38(a,1),7(a,1,2)),rewrite([146(12),131(10),60(8),55(6),131(12),60(10),55(8)]),flip(a)].
+709 ((((a * a) * a) * a) * a) * c = c.  [para(38(a,1),12(a,1,1))].
+718 (((c * c) * a) * c) * (c * (a * c)) = (((a * a) * a) * a) * a.  [para(19(a,2),38(a,1,1)),rewrite([706(5),706(10),60(11),187(11)])].
+719 x * c = x * a.  [para(38(a,1),60(a,2,2)),rewrite([706(5),706(12),131(15),138(13),718(13),709(11),146(12),131(10),60(8),55(6)])].
+761 c = a.  [back_rewrite(709),rewrite([719(11),12(11)]),flip(a)].
+762 $F.  [resolve(761,a,15,a)].
+
+============================== end of proof ==========================

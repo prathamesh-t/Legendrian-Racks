@@ -1,0 +1,43 @@
+============================== prooftrans ============================
+Prover9 (64) version 2009-11A, November 2009.
+Process 11577 was started by prathamesh on sas205,
+Mon Feb 20 18:01:16 2017
+The command was "/usr/bin/prover9".
+============================== end of head ===========================
+
+============================== end of input ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.04 (+ 0.00) seconds.
+% Length of proof is 22.
+% Level of proof is 6.
+% Maximum clause weight is 16.000.
+% Given clauses 94.
+
+
+3 (all x all y (x * y) @ y = x) # label(non_clause).  [assumption].
+4 (all x pow(x) = (((((x * x) * x) * x) * x) * x) * x) # label(non_clause).  [assumption].
+6 (all x pow6(x) = ((((x * x) * x) * x) * x) * x) # label(non_clause).  [assumption].
+10 (all x D(pow(x),x)) # label(non_clause).  [assumption].
+23 (all x all y all z (D(x * z,y) & U(y,z) -> x = z)) # label(non_clause).  [assumption].
+30 (all x all y all z (U(x,y) -> (z @ y) * x = z)) # label(non_clause).  [assumption].
+35 b = pow6(a) # label(non_clause) # label(goal).  [goal].
+38 (x * y) @ y = x.  [clausify(3)].
+39 pow(x) = (((((x * x) * x) * x) * x) * x) * x.  [clausify(4)].
+41 pow6(x) = ((((x * x) * x) * x) * x) * x.  [clausify(6)].
+46 D(pow(x),x).  [clausify(10)].
+47 D((((((x * x) * x) * x) * x) * x) * x,x).  [copy(46),rewrite([39(1)])].
+69 -D(x * y,z) | -U(z,y) | y = x.  [clausify(23)].
+77 -U(x,y) | (z @ y) * x = z.  [clausify(30)].
+82 U(a,b).  [assumption].
+83 pow6(a) != b.  [deny(35)].
+84 ((((a * a) * a) * a) * a) * a != b.  [copy(83),rewrite([41(2)])].
+145 (x @ b) * a = x.  [hyper(77,a,82,a)].
+161 x * b = x * a.  [para(38(a,1),145(a,1,1)),flip(a)].
+189 -D(x * a,y) | -U(y,b) | b = x.  [para(161(a,1),69(a,1))].
+688 ((((a * a) * a) * a) * a) * a = b.  [hyper(189,a,47,a,b,82,a),flip(a)].
+689 $F.  [resolve(688,a,84,a)].
+
+============================== end of proof ==========================
