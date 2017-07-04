@@ -1,0 +1,66 @@
+============================== prooftrans ============================
+Prover9 (32) version Dec-2007, Dec 2007.
+Process 5803 was started by prathamesh on Deep-Thought,
+Tue Jul  4 01:13:06 2017
+The command was "/home/prathamesh/p9m4-v05/bin/prover9".
+============================== end of head ===========================
+
+============================== end of input ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.02 (+ 0.01) seconds.
+% Length of proof is 46.
+% Level of proof is 10.
+% Maximum clause weight is 21.
+% Given clauses 27.
+
+1 (all x all y all z (x * y) * z = (x * z) * (y * z)) # label(non_clause).  [assumption].
+3 (all x all y (x * y) @ y = x) # label(non_clause).  [assumption].
+4 (all x pow(x) = ((x * x) * x) * x) # label(non_clause).  [assumption].
+5 (all x x = pow(x)) # label(non_clause).  [assumption].
+6 (all x cusp(x) = x * x) # label(non_clause).  [assumption].
+7 (all a all b (U(a,b) <-> b = cusp(a))) # label(non_clause).  [assumption].
+8 a_1 * a_1 = a_1 # label(non_clause) # label(goal).  [goal].
+10 -U(x,y) | cusp(x) = y.  [clausify(7)].
+11 U(a_1,a_2).  [assumption].
+12 U(a_2,a_3).  [assumption].
+13 U(a_3,a_4).  [assumption].
+14 U(a_4,a_1).  [assumption].
+15 (x * y) * (z * y) = (x * z) * y.  [clausify(1)].
+17 (x * y) @ y = x.  [clausify(3)].
+18 pow(x) = ((x * x) * x) * x.  [clausify(4)].
+19 pow(x) = x.  [clausify(5)].
+20 ((x * x) * x) * x = x.  [copy(19),rewrite([18(1)])].
+21 cusp(x) = x * x.  [clausify(6)].
+22 a_1 * a_1 != a_1.  [deny(8)].
+23 cusp(a_1) = a_2.  [resolve(11,a,10,a)].
+24 a_1 * a_1 = a_2.  [copy(23),rewrite([21(2)])].
+25 cusp(a_2) = a_3.  [resolve(12,a,10,a)].
+26 a_2 * a_2 = a_3.  [copy(25),rewrite([21(2)])].
+27 cusp(a_3) = a_4.  [resolve(13,a,10,a)].
+28 a_3 * a_3 = a_4.  [copy(27),rewrite([21(2)])].
+29 cusp(a_4) = a_1.  [resolve(14,a,10,a)].
+30 a_4 * a_4 = a_1.  [copy(29),rewrite([21(2)])].
+32 a_2 != a_1.  [back_rewrite(22),rewrite([24(3)])].
+33 ((x * y) * z) * (u * (y * z)) = ((x * z) * u) * (y * z).  [para(15(a,1),15(a,1,1))].
+35 ((x * y) * z) * ((u * y) * z) = ((x * u) * y) * z.  [para(15(a,1),15(a,2,1))].
+50 ((x * x) * (x * x)) * x = x.  [para(15(a,2),20(a,1,1))].
+51 x @ x = (x * x) * x.  [para(20(a,1),17(a,1,1))].
+56 (a_2 * a_1) * a_1 = a_1.  [para(24(a,1),20(a,1,1,1))].
+59 (a_2 * x) * (a_2 * x) = a_3 * x.  [para(26(a,1),15(a,2,1))].
+61 (a_3 * a_2) * a_2 = a_2.  [para(26(a,1),20(a,1,1,1))].
+116 ((a_2 * a_1) * x) * a_2 = a_1 * (x * a_2).  [para(56(a,1),33(a,1,1)),rewrite([24(4),24(11)]),flip(a)].
+177 ((a_2 * a_1) * x) * (a_2 * x) = a_1 * x.  [para(56(a,1),35(a,2,1)),rewrite([24(7)])].
+210 a_3 * a_1 = a_1.  [para(24(a,1),50(a,1,1,1)),rewrite([24(4),26(3)])].
+212 a_1 * a_3 = a_3.  [para(28(a,1),50(a,1,1,1)),rewrite([28(4),30(3)])].
+250 a_2 * a_1 = a_3.  [para(210(a,1),17(a,1,1)),rewrite([51(3),24(3)])].
+254 (a_3 * x) * (a_2 * x) = a_1 * x.  [back_rewrite(177),rewrite([250(3)])].
+255 (a_3 * x) * a_2 = a_1 * (x * a_2).  [back_rewrite(116),rewrite([250(3)])].
+258 a_3 = a_2.  [back_rewrite(61),rewrite([255(5),26(4),212(3)])].
+260 a_2 * x = a_1 * x.  [back_rewrite(254),rewrite([258(1),59(5),258(1)])].
+268 a_2 = a_1.  [back_rewrite(210),rewrite([258(1),260(3),24(3)])].
+269 $F.  [resolve(268,a,32,a)].
+
+============================== end of proof ==========================

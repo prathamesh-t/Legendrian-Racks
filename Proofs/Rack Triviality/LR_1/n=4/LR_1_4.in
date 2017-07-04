@@ -1,0 +1,43 @@
+% Saved by Prover9-Mace4 Version 0.5, December 2007.
+
+set(ignore_option_dependencies). % GUI handles dependencies
+
+if(Prover9). % Options for Prover9
+  assign(max_weight, 25).
+  set(restrict_denials).
+  assign(new_constants, 1).
+  assign(max_seconds, 60).
+end_if.
+
+if(Mace4).   % Options for Mace4
+  assign(max_seconds, 60).
+end_if.
+
+formulas(assumptions).
+
+%Legendrian Rack 3
+all x all y all z ((x*y)*z = (x*z)*(y*z)).
+all x all y ((x@y) * y = x).
+all x all y ((x*y)@y = x).
+
+all x (pow(x) = ((x*x)*x)*x).
+
+all x (x = pow(x)).
+
+all x (cusp(x) = x*x).
+
+all a all b (U(a,b) <-> b = cusp(a)).
+
+U(a_1, a_2).
+U(a_2, a_3).
+U(a_3, a_4).
+U(a_4, a_1).
+
+end_of_list.
+
+formulas(goals).
+
+a_1 * a_1 = a_1.
+
+end_of_list.
+
